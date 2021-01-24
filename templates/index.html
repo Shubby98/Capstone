@@ -1,7 +1,45 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <center>
+            <h1>Capstone</h1>
+            <form action="/cap/" method="post" enctype="multipart/form-data">
+                <input id= "file" type="file" name = "img">
+                <button id="sbt_bt" type="submit">Upload</button>
+            </form>
+        </center>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sbt_btn').click(function() {
+                var fd = new FormData();
+                var files = $('#file')[0].files;
+
+                if(files.length > 0){
+                    fd.append('file' , files[0]);
+                    $.ajax({
+                        url : '/cap/',
+                        type : 'POST',
+                        data : fd,
+                        contentType : false,
+                        processData : false,
+                        success : function(res) {
+                            console.log(res);
+                        },
+                        error : function(res){
+                            console.log("error ==> " + res);
+                        },
+                    });
+                }
+
+
+            })
+        });
+    </script>
+    </body>
 </html>
 
-<body>
-    <h1>Capstone</h1>
-</body>

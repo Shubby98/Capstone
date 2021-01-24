@@ -1,3 +1,8 @@
 /saved/glove.6B.50d.txt
 /model
-
+/.ipynb_checkpoints
+/myvenv
+test8.JPG
+test_img
+__pycache__/
+.idea/

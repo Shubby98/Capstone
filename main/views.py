@@ -1,6 +1,17 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+
+def handle_uploaded_file(f):
+    with open('name.jpg', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 # Create your views here.
-class Index(TemplateView):
-    template_name = 'index.html'
+def index(request):    
+    return render(request , "index.html")
+
+def cap(request):
+    handle_uploaded_file(request.FILES['img'] )
+    return HttpResponse("hey")
