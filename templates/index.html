@@ -1,20 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
     </head>
-    <body>
-        <center>
-            <h1>Capstone</h1>
-            <form action="/cap/" method="post" enctype="multipart/form-data">
-                <input id= "file" type="file" name = "img">
-                <button id="sbt_bt" type="submit">Upload</button>
-            </form>
-        </center>
+    <body class="container section" style="background-color: #fbe3e8 " >
+        <div class="section" style="background-color: #5cbdb9">
+            <center>
+                <h1 class="container section" style="alignment: center; color: #ebf6f5">Capstone</h1>
+                <div class = "divider"></div>
+                <div class = "container section">
+                    <input id= "file" type="file" name = "img">
+                    <button id="sbt_btn" type="submit">Upload</button>
+                </div>
+                <div class = "container section card-image" >
+                    <img src="" style="display: none" id ="img_tag" width="250px" height="250px" >
+                </div>
+                <div class = "container card-panel" id = "cap-card" style="display: none"></div>
+            </center>
+        </div>
 
     <script type="text/javascript">
         $(document).ready(function () {
+            const inpfile = document.getElementById("file");
+            const preview = document.getElementById("img_tag");
+
+            inpfile.addEventListener("change" , function (){
+                const file = this.files[0];
+
+                if(file){
+                    const reader = new FileReader();
+                    preview.style.display = "block";
+                    reader.addEventListener("load" , function (){
+                       preview.setAttribute("src" , this.result);
+
+                    });
+
+                    reader.readAsDataURL(file)
+                }
+            });
+
             $('#sbt_btn').click(function() {
                 var fd = new FormData();
                 var files = $('#file')[0].files;

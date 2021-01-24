@@ -66,9 +66,3 @@ def predict_caption(photo , word_to_idx , idx_to_word , model , resnet):
     final_caption = ' '.join(final_caption)
     return final_caption
 
-
-model = load_mymodel()
-idx_to_word , word_to_idx , vocab_size = load_vocab()
-resnet = load_resnet()
-caption = predict_caption("test7.jpg", word_to_idx , idx_to_word , model , resnet)
-print(caption)
