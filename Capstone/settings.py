@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from capgen import load_mymodel, load_vocab , load_resnet
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -123,3 +124,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+

@@ -12,18 +12,22 @@
 
     </head>
     <body class="container section" style="background-color: #fbe3e8 " >
-        <div class="section" style="background-color: #5cbdb9">
+        <div class="section" style="background-color: #5cbdb9; border: 3px solid black;">
             <center>
                 <h1 class="container section" style="alignment: center; color: #ebf6f5">Capstone</h1>
                 <div class = "divider"></div>
                 <div class = "container section">
                     <input id= "file" type="file" name = "img">
-                    <button id="sbt_btn" type="submit">Upload</button>
                 </div>
                 <div class = "container section card-image" >
-                    <img src="" style="display: none" id ="img_tag" width="250px" height="250px" >
+                    <img src="" style="display: none" id ="img_tag" class="responsive-img"  width = "600px">
                 </div>
-                <div class = "container card-panel" id = "cap-card" style="display: none"></div>
+                <button class="waves-effect waves-light btn-large blue lighten-5 black-text" id="sbt_btn" type="submit" style="display:none">Get Caption</button>
+                <div class = "container section card-panel" id = "cap-card" style="display: none">
+                    <h4 class="section">Caption</h4>
+                    <div class = "divider black" ></div>
+                    <p id = "cap_text" class = "section" ></p>
+                </div>
             </center>
         </div>
 
@@ -31,6 +35,7 @@
         $(document).ready(function () {
             const inpfile = document.getElementById("file");
             const preview = document.getElementById("img_tag");
+            const sbt_btn = document.getElementById("sbt_btn");
 
             inpfile.addEventListener("change" , function (){
                 const file = this.files[0];
@@ -38,10 +43,12 @@
                 if(file){
                     const reader = new FileReader();
                     preview.style.display = "block";
+                    sbt_btn.style.display = "block";
                     reader.addEventListener("load" , function (){
                        preview.setAttribute("src" , this.result);
 
                     });
+
 
                     reader.readAsDataURL(file)
                 }
@@ -50,7 +57,8 @@
             $('#sbt_btn').click(function() {
                 var fd = new FormData();
                 var files = $('#file')[0].files;
-
+                const cap = document.getElementById("cap_text");
+                const cap_card = document.getElementById("cap-card");
                 if(files.length > 0){
                     fd.append('file' , files[0]);
                     $.ajax({
@@ -61,6 +69,8 @@
                         processData : false,
                         success : function(res) {
                             console.log(res);
+                            cap.innerText = res;
+                            cap_card.style.display = "block";
                         },
                         error : function(res){
                             console.log("error ==> " + res);

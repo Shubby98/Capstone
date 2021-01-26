@@ -11,7 +11,7 @@ dpath = "../"
 max_len = 32
 
 def load_mymodel():
-    model = load_model(dpath + 'Capstone/model/model_10.h5')
+    model = load_model(dpath + 'Capstone/model/model_2.h5')
     return model
 
 def load_vocab():
